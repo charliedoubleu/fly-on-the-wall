@@ -6,7 +6,7 @@ function setup(){
 var x = 50;
 var speed = 1;
 function draw(){
-    let a = select('#words');
+    let a = select('#words-div');
     a.position(x,50);
     x += speed;
     if(x >= 100){
