@@ -39,12 +39,13 @@
             snapshot.forEach(function(element){
                 const lineWords = element.val().split(" ");
                 lineWords.forEach(word => {
-                  const tag = document.createElement("p");
-                  tag.classList.add("added-word");
+                  wordsDiv.innerHTML += `<p class="added-word">${word}</p>`;
+                  // const tag = document.createElement("p");
+                  // tag.classList.add("added-word");
 
-                  const text = document.createTextNode(word);
-                  tag.appendChild(text);
-                  wordsDiv.appendChild(tag);
+                  // const text = document.createTextNode(word);
+                  // tag.appendChild(text);
+                  // wordsDiv.appendChild(tag);
                 });
             });
         });
