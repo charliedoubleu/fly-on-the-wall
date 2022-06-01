@@ -30,14 +30,22 @@
         import { getDatabase, ref, onValue} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
         const db = getDatabase();
 
-        const firebaseRef = ref(db, 'users/' + 'rasbpi');
-        onValue(firebaseRef, (snapshot) => {
-            var wordsDiv = document.getElementById("words-div");
-            wordsDiv.innerHTML = "";
+        const globalWordsArray = [];
 
+        const firebaseRef = ref(db, 'users/' + 'rasbpi');
+        const wordsDiv = document.getElementById("words-div");
+        onValue(firebaseRef, (snapshot) => {
+            wordsDiv.innerHTML = "";
             snapshot.forEach(function(element){
-                var newParagraphElement = `<p>${element.val()}</p>`;
-                wordsDiv.innerHTML += newParagraphElement;
+                const lineWords = element.val().split(" ");
+                lineWords.forEach(word => {
+                  const tag = document.createElement("p");
+                  tag.classList.add("added-word");
+
+                  const text = document.createTextNode(word);
+                  tag.appendChild(text);
+                  wordsDiv.appendChild(tag);
+                });
             });
         });
       </script>

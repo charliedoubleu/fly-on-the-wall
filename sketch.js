@@ -1,18 +1,16 @@
 function setup(){
-    createCanvas(100,100);
+    createCanvas(500,500);
     background(255);
 }
 
-var x = 50;
-var speed = 1;
 function draw(){
-    let a = select('#words-div');
-    a.position(x,50);
-    x += speed;
-    if(x >= 100){
-        speed = -speed;
-    }
-    if( x <= 1){
-        speed = -speed;
+    let wordsDiv = select('#words-div');
+    var addedWords = select('.added-word', wordsDiv);
+    if (addedWords) {
+        for (var i = 0; i < addedWords.length; i++) {
+            console.log(addedWords);
+            var el = addedWords[i];
+            el.position(50, 50);
+        }
     }
 }
