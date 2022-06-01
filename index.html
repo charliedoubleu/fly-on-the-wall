@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+
+    <title>Fly On The Wall</title>
+</head>
+<body>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyBoYWgj887XLnMYUzTDlr968W81LmvSqI4",
+          authDomain: "esp8266-test-a331c.firebaseapp.com",
+          databaseURL: "https://esp8266-test-a331c-default-rtdb.firebaseio.com",
+          projectId: "esp8266-test-a331c",
+          storageBucket: "esp8266-test-a331c.appspot.com",
+          messagingSenderId: "108689210792",
+          appId: "1:108689210792:web:04f57a07bacd017a0af19d",
+          measurementId: "G-EWWD9FL4RH"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+        import { getDatabase, ref, onValue} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
+
+
+        const db = getDatabase();
+        // const firebaseRef = ref(db, 'users/' + 'charlie' + '/test');
+        const firebaseRef = ref(db, 'users/' + 'charlie');
+        onValue(firebaseRef, (snapshot) => {
+            snapshot.forEach(function(element){
+                //console.log(element.val());
+                var tag = document.createElement("p");
+                var content = document.createTextNode(element.val());
+                tag.appendChild(content);
+                
+                var element = document.getElementById("words");
+                element.appendChild(tag);
+
+            });
+       // const data = snapshot.val();
+        //console.log(data);
+
+        //create p tags with words from db
+        // var tag = document.createElement("p");
+        // var content = document.createTextNode(data);
+        // tag.appendChild(content);
+        // //add p tags to div
+        // var element = document.getElementById("words");
+        // element.appendChild(tag);
+
+        });
+      </script>
+
+    <h1 id="word">Words:</h1>
+    <div id="words"></div>
+
+
+</body>
+</html>
