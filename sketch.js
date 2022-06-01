@@ -9,7 +9,6 @@ function draw(){
 
     if (addedWords) {
         for (var i = 0; i < addedWords.length; i++) {
-            console.log(addedWords);
             var el = addedWords[i];
 
             if (!el.hasClass('already-touched')) {
