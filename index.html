@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
     <script src="sketch.js"></script>
+    <link rel="stylesheet" href="styles.css">
 
     <title>Fly On The Wall</title>
 </head>
@@ -27,41 +28,39 @@
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-
-
         import { getDatabase, ref, onValue} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
-
-
         const db = getDatabase();
-        // const firebaseRef = ref(db, 'users/' + 'charlie' + '/test');
-        const firebaseRef = ref(db, 'users/' + 'charlie');
+
+        const firebaseRef = ref(db, 'users/' + 'rasbpi');
+        const wordsDiv = document.getElementById("words-div");
+
+        // copy that RG
+        const tailNumber = 100;
+
         onValue(firebaseRef, (snapshot) => {
+            wordsDiv.innerHTML = "";
+
+            var i = 0;
+            const snapshotSize = snapshot.size;
             snapshot.forEach(function(element){
-                //console.log(element.val());
-                var tag = document.createElement("p");
-                var content = document.createTextNode(element.val());
-                tag.appendChild(content);
-                
-                var element = document.getElementById("words");
-                element.appendChild(tag);
-
+                if (snapshotSize <= tailNumber || (i >= snapshotSize - tailNumber)) {
+                  const lineWords = element.val().split(" ");
+                  lineWords.forEach(word => {
+                    wordsDiv.innerHTML += `<p class="added-word">${word}</p>`;
+                  });
+                }
+                i += 1;
             });
-       // const data = snapshot.val();
-        //console.log(data);
-
-        //create p tags with words from db
-        // var tag = document.createElement("p");
-        // var content = document.createTextNode(data);
-        // tag.appendChild(content);
-        // //add p tags to div
-        // var element = document.getElementById("words");
-        // element.appendChild(tag);
-
         });
       </script>
 
-    <h1 id="word">Words:</h1>
-    <div id="words"></div>
+<h1 id="title">fly on the wall</h1>
+<div id="logo">
+<img src="logo.png" alt="logo">
+</div>
+
+
+<div id="words-div"></div>
 
 
 </body>

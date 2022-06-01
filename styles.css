@@ -1,0 +1,19 @@
+#title{
+    text-align: center;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+
+#logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img{
+    width: 1000px;
+    padding-left: 400px;
+    padding-top: 50px;
+}
+
+
+

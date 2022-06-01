@@ -1,18 +1,24 @@
 function setup(){
-    createCanvas(100,100);
+    createCanvas(windowWidth,windowHeight);
     background(255);
 }
 
-var x = 50;
-var speed = 1;
 function draw(){
-    let a = select('#words');
-    a.position(x,50);
-    x += speed;
-    if(x >= 100){
-        speed = -speed;
-    }
-    if( x <= 1){
-        speed = -speed;
+    let wordsDiv = select('#words-div');
+    var addedWords = selectAll('.added-word', wordsDiv);
+
+    if (addedWords) {
+        for (var i = 0; i < addedWords.length; i++) {
+            var el = addedWords[i];
+
+            if (!el.hasClass('already-touched')) {
+                el.position(random(width), random(100, height));
+                el.addClass('already-touched');
+            }
+        }
     }
 }
+
+
+
+
