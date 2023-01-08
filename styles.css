@@ -1,0 +1,44 @@
+#title{
+    text-align: center;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+
+#logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo img{
+    width: 1000px;
+    padding-left: 400px;
+    padding-top: 50px;
+}
+
+a{
+    font-size: larger;
+}
+
+.about p{
+    text-align: center;
+    font-size: large;
+    padding: 10px 30px;
+}
+
+.about img{
+    display: block;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.about h1{
+    text-align: center;
+}
+.about #github{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+

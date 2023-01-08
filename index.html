@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Fly On The Wall</title>
+</head>
+<body>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+          apiKey: "",
+          authDomain: "",
+          databaseURL: "",
+          projectId: "",
+          storageBucket: "",
+          messagingSenderId: "",
+          appId: "",
+          measurementId: ""
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import { getDatabase, ref, onValue} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
+        const db = getDatabase();
+
+        const firebaseRef = ref(db, 'users/' + 'rasbpi');
+        const wordsDiv = document.getElementById("words-div");
+
+        // copy that RG
+        const tailNumber = 100;
+
+        onValue(firebaseRef, (snapshot) => {
+            wordsDiv.innerHTML = "";
+
+            var i = 0;
+            const snapshotSize = snapshot.size;
+            snapshot.forEach(function(element){
+                if (snapshotSize <= tailNumber || (i >= snapshotSize - tailNumber)) {
+                  const lineWords = element.val().split(" ");
+                  lineWords.forEach(word => {
+                    wordsDiv.innerHTML += `<p class="added-word">${word}</p>`;
+                  });
+                }
+                i += 1;
+            });
+        });
+      </script>
+
+<a href="/about.html">about</a>
+<h1 id="title">fly on the wall</h1>
+<div id="logo">
+<img src="logo.png" alt="logo">
+</div>
+
+
+<div id="words-div"></div>
+
+
+</body>
+</html>
